@@ -2,7 +2,7 @@
   "tarefas": [
     {
       "id": 1,
-      "titulo": "Beber água",
+      "titulo": "Lavar o rosto",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
@@ -10,22 +10,6 @@
     },
     {
       "id": 2,
-      "titulo": "Arrumar a cama",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 3,
-      "titulo": "Trocar de roupa",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 4,
       "titulo": "Escovar os dentes",
       "completa": false,
       "intercala": false,
@@ -33,8 +17,24 @@
       "diaSemana": null
     },
     {
+      "id": 3,
+      "titulo": "Pentear o cabelo",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 4,
+      "titulo": "Trocar de roupa",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
       "id": 5,
-      "titulo": "Organizar o quarto",
+      "titulo": "Tomar água 5x",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
@@ -42,7 +42,7 @@
     },
     {
       "id": 6,
-      "titulo": "Preparar o lanche",
+      "titulo": "Passar fio dental",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
@@ -50,7 +50,7 @@
     },
     {
       "id": 7,
-      "titulo": "Duolingo",
+      "titulo": "Arrumar a cama",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
@@ -58,7 +58,7 @@
     },
     {
       "id": 8,
-      "titulo": "Pentear cabelo",
+      "titulo": "Ensaio piano",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
@@ -66,27 +66,107 @@
     },
     {
       "id": 9,
-      "titulo": "Praticar piano",
+      "titulo": "Abrir janela",
       "completa": false,
       "intercala": false,
-      "exclusiva": "isabela",
-      "diaSemana": ["segunda", "quarta", "sexta"]
+      "exclusiva": null,
+      "diaSemana": null
     },
     {
       "id": 10,
-      "titulo": "Tirar o lixo",
+      "titulo": "Arrumar quarto",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 11,
+      "titulo": "Dobrar roupas",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 12,
+      "titulo": "Tirar lixo",
       "completa": false,
       "intercala": true,
       "exclusiva": null,
       "diaSemana": null
     },
     {
-      "id": 11,
+      "id": 13,
+      "titulo": "Encher garrafas",
+      "completa": false,
+      "intercala": true,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 14,
+      "titulo": "Arrumar mesa",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 15,
+      "titulo": "Preparar lanches",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 16,
+      "titulo": "Ração e água Pirata",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 17,
+      "titulo": "Escovar Pirata",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 18,
+      "titulo": "TIC TIC Avemys",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 19,
       "titulo": "Dia do brinquedo",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
-      "diaSemana": ["sexta"]
+      "diaSemana": null
+    },
+    {
+      "id": 20,
+      "titulo": "Duolingo",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 21,
+      "titulo": "Vitamina D",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
     }
   ]
 } 
