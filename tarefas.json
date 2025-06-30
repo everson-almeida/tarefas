@@ -1,0 +1,92 @@
+{
+  "tarefas": [
+    {
+      "id": 1,
+      "titulo": "Beber água",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 2,
+      "titulo": "Arrumar a cama",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 3,
+      "titulo": "Trocar de roupa",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 4,
+      "titulo": "Escovar os dentes",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 5,
+      "titulo": "Organizar o quarto",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 6,
+      "titulo": "Preparar o lanche",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 7,
+      "titulo": "Duolingo",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 8,
+      "titulo": "Pentear cabelo",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 9,
+      "titulo": "Praticar piano",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": "isabela",
+      "diaSemana": ["segunda", "quarta", "sexta"]
+    },
+    {
+      "id": 10,
+      "titulo": "Tirar o lixo",
+      "completa": false,
+      "intercala": true,
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 11,
+      "titulo": "Dia do brinquedo",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": null,
+      "diaSemana": ["sexta"]
+    }
+  ]
+} 

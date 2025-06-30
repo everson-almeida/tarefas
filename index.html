@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="splash-screen">
+      <div class="splash-content">
+        <div class="splash-title">
+          <h1>✨ Tarefas ✨</h1>
+          <div class="sparkles">
+            <span class="sparkle">⭐</span>
+            <span class="sparkle">🌟</span>
+            <span class="sparkle">💫</span>
+            <span class="sparkle">✨</span>
+            <span class="sparkle">🎀</span>
+          </div>
+        </div>
+        <div class="splash-subtitle">
+          <p>Isabela & Rafaela</p>
+        </div>
+        <div class="loading-animation">
+          <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <div class="splash-decoration">
+          <div class="floating-hearts">
+            <span class="heart">💖</span>
+            <span class="heart">💝</span>
+            <span class="heart">💕</span>
+            <span class="heart">💗</span>
+            <span class="heart">💓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela Principal -->
+    <div id="mainScreen" class="main-screen" style="display: none;">
+      <h1>Tarefas</h1>
+      
+      <div class="container">
+        <div class="coluna">
+          <h2 class="titulo-coluna isabela">Isabela</h2>
+          <ul class="todo-list" id="colunaIsabela">
+            <!-- As tarefas da Isabela serão carregadas aqui -->
+          </ul>
+        </div>
+        
+        <div class="coluna">
+          <h2 class="titulo-coluna rafaela">Rafaela</h2>
+          <ul class="todo-list" id="colunaRafaela">
+            <!-- As tarefas da Rafaela serão carregadas aqui -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
