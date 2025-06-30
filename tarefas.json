@@ -3,181 +3,52 @@
     "info": "Este arquivo contém a lista de tarefas a serem exibidas no aplicativo.",
     "propriedades_tarefa": {
       "id": "Número de identificação único para cada tarefa.",
-      "titulo": "O texto que descreve a tarefa (ex: 'Arrumar a cama').",
-      "completa": "Legado. O estado de conclusão agora é salvo no navegador (localStorage) e não aqui.",
-      "intercala": "Controla como a tarefa é dividida. Opções: false (para ambas), 'diario' (alterna dia sim/dia não), 'isabela' (Isabela nos dias pares do mês, Rafaela nos ímpares), 'rafaela' (Rafaela nos dias pares, Isabela nos ímpares).",
-      "exclusiva": "Atribui a tarefa permanentemente a uma pessoa. Opções: 'isabela', 'rafaela', ou null (se não for exclusiva). Substitui a regra 'intercala'.",
-      "diaSemana": "Define dias específicos para a tarefa aparecer. Opções: array de strings (ex: ['segunda', 'quarta']) ou null (se aparece todos os dias)."
+      "pessoa": "A quem a tarefa pertence: 'isabela' ou 'rafaela'.",
+      "titulo": "O texto que descreve a tarefa.",
+      "paridade": "Se a tarefa aparece em dias 'par', 'impar' ou null (todos os dias do mês).",
+      "diasSemana": "Array de dias da semana em que a tarefa aparece (ex: ['segunda', 'quarta']) ou null para todos os dias."
     }
   },
   "tarefas": [
-    {
-      "id": 1,
-      "titulo": "Lavar o rosto",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 2,
-      "titulo": "Escovar os dentes",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 3,
-      "titulo": "Pentear o cabelo",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 4,
-      "titulo": "Trocar de roupa",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 5,
-      "titulo": "Tomar água 5x",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 6,
-      "titulo": "Passar fio dental",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 7,
-      "titulo": "Arrumar a cama",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 9,
-      "titulo": "Abrir janela",
-      "completa": false,
-      "intercala": "isabnela",
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 10,
-      "titulo": "Arrumar quarto",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 11,
-      "titulo": "Dobrar roupas",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 15,
-      "titulo": "Preparar lanches",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 19,
-      "titulo": "Dia do brinquedo",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 20,
-      "titulo": "Duolingo",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 21,
-      "titulo": "Vitamina D",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 12,
-      "titulo": "Tirar lixo",
-      "completa": false,
-      "intercala": "isabela",
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 13,
-      "titulo": "Encher garrafas",
-      "completa": false,
-      "intercala": "rafaela",
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 14,
-      "titulo": "Arrumar mesa",
-      "completa": false,
-      "intercala": "rafaela",
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 16,
-      "titulo": "Ração e água Pirata",
-      "completa": false,
-      "intercala": "isabela",
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 17,
-      "titulo": "Escovar Pirata",
-      "completa": false,
-      "intercala": "rafaela",
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 8,
-      "titulo": "Ensaio piano",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": "isabela",
-      "diaSemana": null
-    },
-    {
-      "id": 18,
-      "titulo": "TIC TIC Avemys",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": "isabela",
-      "diaSemana": null
-    }
+    { "id": 1, "pessoa": "isabela", "titulo": "Lavar o rosto", "paridade": null, "diasSemana": null },
+    { "id": 2, "pessoa": "rafaela", "titulo": "Lavar o rosto", "paridade": null, "diasSemana": null },
+    { "id": 3, "pessoa": "isabela", "titulo": "Escovar os dentes", "paridade": null, "diasSemana": null },
+    { "id": 4, "pessoa": "rafaela", "titulo": "Escovar os dentes", "paridade": null, "diasSemana": null },
+    { "id": 5, "pessoa": "isabela", "titulo": "Pentear o cabelo", "paridade": null, "diasSemana": null },
+    { "id": 6, "pessoa": "rafaela", "titulo": "Pentear o cabelo", "paridade": null, "diasSemana": null },
+    { "id": 7, "pessoa": "isabela", "titulo": "Trocar de roupa", "paridade": null, "diasSemana": null },
+    { "id": 8, "pessoa": "rafaela", "titulo": "Trocar de roupa", "paridade": null, "diasSemana": null },
+    { "id": 9, "pessoa": "isabela", "titulo": "Tomar água 5x", "paridade": null, "diasSemana": null },
+    { "id": 10, "pessoa": "rafaela", "titulo": "Tomar água 5x", "paridade": null, "diasSemana": null },
+    { "id": 11, "pessoa": "isabela", "titulo": "Passar fio dental", "paridade": null, "diasSemana": null },
+    { "id": 12, "pessoa": "rafaela", "titulo": "Passar fio dental", "paridade": null, "diasSemana": null },
+    { "id": 13, "pessoa": "isabela", "titulo": "Arrumar a cama", "paridade": null, "diasSemana": null },
+    { "id": 14, "pessoa": "rafaela", "titulo": "Arrumar a cama", "paridade": null, "diasSemana": null },
+    { "id": 15, "pessoa": "isabela", "titulo": "Abrir janela", "paridade": "par", "diasSemana": null },
+    { "id": 16, "pessoa": "rafaela", "titulo": "Abrir janela", "paridade": "impar", "diasSemana": null },
+    { "id": 17, "pessoa": "isabela", "titulo": "Arrumar quarto", "paridade": null, "diasSemana": null },
+    { "id": 18, "pessoa": "rafaela", "titulo": "Arrumar quarto", "paridade": null, "diasSemana": null },
+    { "id": 19, "pessoa": "isabela", "titulo": "Dobrar roupas", "paridade": null, "diasSemana": null },
+    { "id": 20, "pessoa": "rafaela", "titulo": "Dobrar roupas", "paridade": null, "diasSemana": null },
+    { "id": 21, "pessoa": "isabela", "titulo": "Preparar lanches", "paridade": null, "diasSemana": ["segunda", "quarta", "sexta"] },
+    { "id": 22, "pessoa": "rafaela", "titulo": "Preparar lanches", "paridade": null, "diasSemana": ["terça", "quinta"] },
+    { "id": 23, "pessoa": "isabela", "titulo": "Dia do brinquedo", "paridade": null, "diasSemana": ["sábado"] },
+    { "id": 24, "pessoa": "rafaela", "titulo": "Dia do brinquedo", "paridade": null, "diasSemana": ["sábado"] },
+    { "id": 25, "pessoa": "isabela", "titulo": "Duolingo", "paridade": null, "diasSemana": null },
+    { "id": 26, "pessoa": "rafaela", "titulo": "Duolingo", "paridade": null, "diasSemana": null },
+    { "id": 27, "pessoa": "isabela", "titulo": "Vitamina D", "paridade": null, "diasSemana": null },
+    { "id": 28, "pessoa": "rafaela", "titulo": "Vitamina D", "paridade": null, "diasSemana": null },
+    { "id": 29, "pessoa": "isabela", "titulo": "Tirar lixo", "paridade": "impar", "diasSemana": null },
+    { "id": 30, "pessoa": "rafaela", "titulo": "Tirar lixo", "paridade": "par", "diasSemana": null },
+    { "id": 31, "pessoa": "isabela", "titulo": "Encher garrafas", "paridade": "par", "diasSemana": null },
+    { "id": 32, "pessoa": "rafaela", "titulo": "Encher garrafas", "paridade": "impar", "diasSemana": null },
+    { "id": 33, "pessoa": "isabela", "titulo": "Arrumar mesa", "paridade": "impar", "diasSemana": null },
+    { "id": 34, "pessoa": "rafaela", "titulo": "Arrumar mesa", "paridade": "par", "diasSemana": null },
+    { "id": 35, "pessoa": "isabela", "titulo": "Ração e água Pirata", "paridade": "par", "diasSemana": null },
+    { "id": 36, "pessoa": "rafaela", "titulo": "Ração e água Pirata", "paridade": "impar", "diasSemana": null },
+    { "id": 37, "pessoa": "isabela", "titulo": "Escovar Pirata", "paridade": "impar", "diasSemana": null },
+    { "id": 38, "pessoa": "rafaela", "titulo": "Escovar Pirata", "paridade": "par", "diasSemana": null },
+    { "id": 39, "pessoa": "isabela", "titulo": "Ensaio piano", "paridade": null, "diasSemana": null },    
+    { "id": 41, "pessoa": "isabela", "titulo": "TIC TIC Avemys", "paridade": null, "diasSemana": null }
   ]
 } 

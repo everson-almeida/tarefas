@@ -32,16 +32,6 @@ function isDiaParDoMes() {
   return hoje.getDate() % 2 === 0;
 }
 
-// Retorna true em dias de contagem par, e false em dias de contagem ímpar
-function isDiaDeContagemPar() {
-  const referenceDate = new Date('2024-01-01T00:00:00'); // Data de referência fixa
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Zera a hora para contar dias completos
-  const diffTime = today.getTime() - referenceDate.getTime();
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays % 2 === 0;
-}
-
 // Função para obter a data formatada
 function getDataFormatada() {
   const hoje = new Date();
@@ -63,44 +53,21 @@ function getDiaSemanaAtual() {
 
 // Função para verificar se uma tarefa deve ser exibida para uma pessoa específica
 function deveExibirTarefa(tarefa, pessoa) {
+  // 1. Filtra por pessoa
+  if (tarefa.pessoa !== pessoa) return false;
+
+  // 2. Filtra por paridade
+  if (tarefa.paridade === 'par' && !isDiaParDoMes()) return false;
+  if (tarefa.paridade === 'impar' && isDiaParDoMes()) return false;
+
+  // 3. Filtra por dias da semana
   const diaAtual = getDiaSemanaAtual();
-  
-  // 1. Filtro por dia da semana
-  if (tarefa.diaSemana && tarefa.diaSemana.length > 0) {
-    if (!tarefa.diaSemana.includes(diaAtual)) {
+  if (tarefa.diasSemana && tarefa.diasSemana.length > 0) {
+    if (!tarefa.diasSemana.includes(diaAtual)) {
       return false;
     }
   }
-  
-  // 2. Filtro por tarefa exclusiva
-  if (tarefa.exclusiva) {
-    return tarefa.exclusiva === pessoa;
-  }
-  
-  // 3. Filtro por intercalação
-  if (tarefa.intercala) {
-    // Intercalação DIÁRIA (dia sim, dia não)
-    if (tarefa.intercala === 'diario') {
-      const diaParContagem = isDiaDeContagemPar();
-      // Dia de contagem par para Isabela, ímpar para Rafaela
-      if (pessoa === 'isabela') return diaParContagem;
-      if (pessoa === 'rafaela') return !diaParContagem;
-    }
-    
-    // Intercalação MENSAL (dia do mês par/ímpar).
-    // O valor pode ser `true` (legado), 'isabela' ou 'rafaela'.
-    // A pessoa definida fica com a tarefa nos DIAS PARES do mês. A outra, nos ímpares.
-    // O valor `true` funciona como se fosse 'isabela'.
-    const responsaveis = ['isabela', 'rafaela'];
-    if (tarefa.intercala === true || responsaveis.includes(tarefa.intercala)) {
-      const diaParMes = isDiaParDoMes();
-      const responsavelDiaPar = tarefa.intercala === true ? 'isabela' : tarefa.intercala;
 
-      return diaParMes ? (pessoa === responsavelDiaPar) : (pessoa !== responsavelDiaPar);
-    }
-  }
-  
-  // 4. Padrão: exibe para ambos
   return true;
 }
 
