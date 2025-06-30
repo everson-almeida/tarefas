@@ -1,7 +1,45 @@
-// Função para verificar se é dia par ou ímpar
-function isDiaPar() {
+// Função para obter a data no formato YYYY-MM-DD
+function getCurrentDateString() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Função para limpar estados de dias anteriores
+function cleanupOldStates() {
+  const currentDateKey = `tarefasState_${getCurrentDateString()}`;
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('tarefasState_') && key !== currentDateKey) {
+      localStorage.removeItem(key);
+    }
+  }
+}
+
+// Função para salvar o estado das tarefas
+function saveTasksState() {
+  const dateKey = `tarefasState_${getCurrentDateString()}`;
+  const completedItems = document.querySelectorAll('.todo-item.completed');
+  const completedIds = Array.from(completedItems).map(item => parseInt(item.dataset.id, 10));
+  localStorage.setItem(dateKey, JSON.stringify(completedIds));
+}
+
+// Função para verificar se é dia par ou ímpar (baseado no dia do mês)
+function isDiaParDoMes() {
   const hoje = new Date();
   return hoje.getDate() % 2 === 0;
+}
+
+// Retorna true em dias de contagem par, e false em dias de contagem ímpar
+function isDiaDeContagemPar() {
+  const referenceDate = new Date('2024-01-01T00:00:00'); // Data de referência fixa
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Zera a hora para contar dias completos
+  const diffTime = today.getTime() - referenceDate.getTime();
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays % 2 === 0;
 }
 
 // Função para obter a data formatada
@@ -27,30 +65,42 @@ function getDiaSemanaAtual() {
 function deveExibirTarefa(tarefa, pessoa) {
   const diaAtual = getDiaSemanaAtual();
   
-  // Verificar se a tarefa deve ser exibida no dia da semana atual
+  // 1. Filtro por dia da semana
   if (tarefa.diaSemana && tarefa.diaSemana.length > 0) {
     if (!tarefa.diaSemana.includes(diaAtual)) {
-      return false; // Tarefa não deve ser exibida hoje
+      return false;
     }
   }
   
-  // Se a tarefa é exclusiva para uma pessoa específica
+  // 2. Filtro por tarefa exclusiva
   if (tarefa.exclusiva) {
     return tarefa.exclusiva === pessoa;
   }
   
-  // Se a tarefa tem intercala ativa
+  // 3. Filtro por intercalação
   if (tarefa.intercala) {
-    const diaPar = isDiaPar();
-    // Dias pares para Isabela, dias ímpares para Rafaela
-    if (pessoa === 'isabela') {
-      return diaPar;
-    } else if (pessoa === 'rafaela') {
-      return !diaPar;
+    // Intercalação DIÁRIA (dia sim, dia não)
+    if (tarefa.intercala === 'diario') {
+      const diaParContagem = isDiaDeContagemPar();
+      // Dia de contagem par para Isabela, ímpar para Rafaela
+      if (pessoa === 'isabela') return diaParContagem;
+      if (pessoa === 'rafaela') return !diaParContagem;
+    }
+    
+    // Intercalação MENSAL (dia do mês par/ímpar).
+    // O valor pode ser `true` (legado), 'isabela' ou 'rafaela'.
+    // A pessoa definida fica com a tarefa nos DIAS PARES do mês. A outra, nos ímpares.
+    // O valor `true` funciona como se fosse 'isabela'.
+    const responsaveis = ['isabela', 'rafaela'];
+    if (tarefa.intercala === true || responsaveis.includes(tarefa.intercala)) {
+      const diaParMes = isDiaParDoMes();
+      const responsavelDiaPar = tarefa.intercala === true ? 'isabela' : tarefa.intercala;
+
+      return diaParMes ? (pessoa === responsavelDiaPar) : (pessoa !== responsavelDiaPar);
     }
   }
   
-  // Se não tem intercala nem é exclusiva, exibe para ambos
+  // 4. Padrão: exibe para ambos
   return true;
 }
 
@@ -59,7 +109,24 @@ async function carregarTarefas() {
   try {
     const response = await fetch('tarefas.json');
     const data = await response.json();
-    return data.tarefas || [];
+    let tarefas = data.tarefas || [];
+
+    // Carregar estado salvo
+    const dateKey = `tarefasState_${getCurrentDateString()}`;
+    const savedState = localStorage.getItem(dateKey);
+    const completedIds = savedState ? JSON.parse(savedState) : [];
+
+    // Aplicar estado salvo
+    if (completedIds.length > 0) {
+      tarefas = tarefas.map(tarefa => {
+        if (completedIds.includes(tarefa.id)) {
+          return { ...tarefa, completa: true };
+        }
+        return tarefa;
+      });
+    }
+
+    return tarefas;
   } catch (error) {
     console.error('Erro ao carregar tarefas:', error);
     return [];
@@ -216,6 +283,9 @@ function toggleComplete(checkbox) {
     // Remover classe
     todoItem.classList.remove("completed");
   }
+
+  // Salvar o novo estado
+  saveTasksState();
 }
 
 // Função para mostrar mensagem de sucesso
@@ -263,6 +333,9 @@ document.head.appendChild(style);
 
 // Inicializar a aplicação
 document.addEventListener('DOMContentLoaded', () => {
+  // Limpar estados de dias anteriores
+  cleanupOldStates();
+  
   // Mostrar splash screen por 3 segundos
   setTimeout(() => {
     mostrarTelaPrincipal();

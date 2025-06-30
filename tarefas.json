@@ -1,4 +1,15 @@
 {
+  "_documentacao": {
+    "info": "Este arquivo contém a lista de tarefas a serem exibidas no aplicativo.",
+    "propriedades_tarefa": {
+      "id": "Número de identificação único para cada tarefa.",
+      "titulo": "O texto que descreve a tarefa (ex: 'Arrumar a cama').",
+      "completa": "Legado. O estado de conclusão agora é salvo no navegador (localStorage) e não aqui.",
+      "intercala": "Controla como a tarefa é dividida. Opções: false (para ambas), 'diario' (alterna dia sim/dia não), 'isabela' (Isabela nos dias pares do mês, Rafaela nos ímpares), 'rafaela' (Rafaela nos dias pares, Isabela nos ímpares).",
+      "exclusiva": "Atribui a tarefa permanentemente a uma pessoa. Opções: 'isabela', 'rafaela', ou null (se não for exclusiva). Substitui a regra 'intercala'.",
+      "diaSemana": "Define dias específicos para a tarefa aparecer. Opções: array de strings (ex: ['segunda', 'quarta']) ou null (se aparece todos os dias)."
+    }
+  },
   "tarefas": [
     {
       "id": 1,
@@ -57,18 +68,10 @@
       "diaSemana": null
     },
     {
-      "id": 8,
-      "titulo": "Ensaio piano",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
       "id": 9,
       "titulo": "Abrir janela",
       "completa": false,
-      "intercala": false,
+      "intercala": "isabnela",
       "exclusiva": null,
       "diaSemana": null
     },
@@ -89,56 +92,8 @@
       "diaSemana": null
     },
     {
-      "id": 12,
-      "titulo": "Tirar lixo",
-      "completa": false,
-      "intercala": true,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 13,
-      "titulo": "Encher garrafas",
-      "completa": false,
-      "intercala": true,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 14,
-      "titulo": "Arrumar mesa",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
       "id": 15,
       "titulo": "Preparar lanches",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 16,
-      "titulo": "Ração e água Pirata",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 17,
-      "titulo": "Escovar Pirata",
-      "completa": false,
-      "intercala": false,
-      "exclusiva": null,
-      "diaSemana": null
-    },
-    {
-      "id": 18,
-      "titulo": "TIC TIC Avemys",
       "completa": false,
       "intercala": false,
       "exclusiva": null,
@@ -166,6 +121,62 @@
       "completa": false,
       "intercala": false,
       "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 12,
+      "titulo": "Tirar lixo",
+      "completa": false,
+      "intercala": "isabela",
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 13,
+      "titulo": "Encher garrafas",
+      "completa": false,
+      "intercala": "rafaela",
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 14,
+      "titulo": "Arrumar mesa",
+      "completa": false,
+      "intercala": "rafaela",
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 16,
+      "titulo": "Ração e água Pirata",
+      "completa": false,
+      "intercala": "isabela",
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 17,
+      "titulo": "Escovar Pirata",
+      "completa": false,
+      "intercala": "rafaela",
+      "exclusiva": null,
+      "diaSemana": null
+    },
+    {
+      "id": 8,
+      "titulo": "Ensaio piano",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": "isabela",
+      "diaSemana": null
+    },
+    {
+      "id": 18,
+      "titulo": "TIC TIC Avemys",
+      "completa": false,
+      "intercala": false,
+      "exclusiva": "isabela",
       "diaSemana": null
     }
   ]
