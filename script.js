@@ -1,4 +1,4 @@
-// Gerenciador de Armazenamento com Proteção de Erros
+// Gerenciador de Armazenamento
 const Storage = {
     safeParse: (key, defaultValue) => {
         try {
@@ -8,19 +8,6 @@ const Storage = {
             console.error(`Erro ao ler ${key}:`, e);
             return defaultValue;
         }
-    },
-
-    getUsers: () => Storage.safeParse('tasks_users', []),
-    saveUsers: (users) => localStorage.setItem('tasks_users', JSON.stringify(users)),
-
-    getTasks: (username) => {
-        const allTasks = Storage.safeParse('tasks_data', {});
-        return allTasks[username] || [];
-    },
-    saveTasks: (username, tasks) => {
-        const allTasks = Storage.safeParse('tasks_data', {});
-        allTasks[username] = tasks;
-        localStorage.setItem('tasks_data', JSON.stringify(allTasks));
     },
 
     getProgress: () => Storage.safeParse('tasks_progress', {}),
@@ -33,14 +20,15 @@ const Storage = {
     }
 };
 
-// Custom Notification System
+// Sistema de Notificações
 const Notification = {
     show: (message, type = 'info') => {
         const area = document.getElementById('notification-area');
+        if (!area) return;
+
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
 
-        // Ícones baseados no tipo
         let icon = '';
         if (type === 'success') icon = '<span style="color:var(--success)">✓</span>';
         if (type === 'error') icon = '<span style="color:var(--danger)">✕</span>';
@@ -48,7 +36,6 @@ const Notification = {
         toast.innerHTML = `${icon}<span>${message}</span>`;
         area.appendChild(toast);
 
-        // Remover após 3 segundos
         setTimeout(() => {
             toast.style.animation = 'slideOutToast 0.3s forwards';
             setTimeout(() => {
@@ -58,16 +45,23 @@ const Notification = {
     }
 };
 
-// Custom Modal System (Mantido apenas para confirmações críticas)
+// Sistema de Modais
 const Modal = {
     confirm: (message, title = "Confirmar") => {
         return new Promise((resolve) => {
             const modal = document.getElementById('custom-confirm');
-            document.getElementById('confirm-title').textContent = title;
-            document.getElementById('confirm-message').textContent = message;
+            if (!modal) {
+                resolve(false);
+                return;
+            }
 
+            const titleEl = document.getElementById('confirm-title');
+            const messageEl = document.getElementById('confirm-message');
             const okBtn = document.getElementById('confirm-ok-btn');
             const cancelBtn = document.getElementById('confirm-cancel-btn');
+
+            if (titleEl) titleEl.textContent = title;
+            if (messageEl) messageEl.textContent = message;
 
             const handleOk = () => {
                 modal.classList.remove('active');
@@ -93,196 +87,118 @@ const Modal = {
     }
 };
 
-// Lógica da Aplicação
+// Aplicação Principal
 const App = {
     currentUser: null,
     currentDateKey: new Date().toISOString().split('T')[0],
-    defaultTasks: [],
+    appData: null,
 
     async init() {
         console.log("Inicializando App...");
-        await this.loadDefaultTasks();
+        await this.loadAppData();
         this.bindEvents();
         this.checkAuth();
         this.updateDateDisplay();
     },
 
-    async loadDefaultTasks() {
+    async loadAppData() {
         try {
             const response = await fetch('tasks.json');
-            const data = await response.json();
-            this.defaultTasks = data.defaultTasks || [];
+            this.appData = await response.json();
+            console.log("Dados carregados:", this.appData);
         } catch (error) {
-            console.error("Erro ao carregar tarefas padrão:", error);
-            this.defaultTasks = ["Tarefa 1", "Tarefa 2"];
+            console.error("Erro ao carregar dados:", error);
+            Notification.show("Erro ao carregar dados do aplicativo.", "error");
         }
     },
 
     bindEvents() {
-        // Navegação Login/Cadastro
-        const btnGoRegister = document.getElementById('go-to-register');
-        if (btnGoRegister) {
-            btnGoRegister.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showScreen('register-screen');
-            });
-        }
-
-        const btnGoLogin = document.getElementById('go-to-login');
-        if (btnGoLogin) {
-            btnGoLogin.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.showScreen('login-screen');
-            });
-        }
-
-        // Navegação Dashboard <-> Gerenciamento
-        const btnManage = document.getElementById('manage-btn');
-        if (btnManage) {
-            btnManage.addEventListener('click', () => {
-                this.showScreen('manage-tasks-screen');
-                this.renderManageList();
-            });
-        }
-
-        const btnBackDash = document.getElementById('back-to-dash-btn');
-        if (btnBackDash) {
-            btnBackDash.addEventListener('click', () => {
-                this.showScreen('dashboard-screen');
-                this.renderTasks();
-            });
-        }
-
-        // Forms
         const loginForm = document.getElementById('login-form');
         if (loginForm) loginForm.addEventListener('submit', (e) => this.handleLogin(e));
 
-        const registerForm = document.getElementById('register-form');
-        if (registerForm) registerForm.addEventListener('submit', (e) => this.handleRegister(e));
-
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) logoutBtn.addEventListener('click', () => this.handleLogout());
-
-        // Adicionar Tarefa
-        const newTaskForm = document.getElementById('new-task-form');
-        if (newTaskForm) newTaskForm.addEventListener('submit', (e) => this.handleAddTask(e));
     },
 
     showScreen(screenId) {
-        console.log("Navegando para:", screenId);
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         const screen = document.getElementById(screenId);
         if (screen) screen.classList.add('active');
-        else console.error("Tela não encontrada:", screenId);
     },
 
     checkAuth() {
         const savedUser = Storage.getCurrentUser();
-        console.log("Usuário salvo:", savedUser);
-        if (savedUser) {
-            this.currentUser = savedUser;
-            this.loadDashboard();
-        } else {
-            this.showScreen('login-screen');
+
+        if (savedUser && this.appData && this.appData.users) {
+            const user = this.appData.users.find(u => u.username === savedUser);
+            if (user) {
+                this.currentUser = savedUser;
+                this.applyTheme(user.theme);
+                this.loadDashboard();
+                return;
+            }
         }
+
+        Storage.setCurrentUser(null);
+        this.showScreen('login-screen');
+        document.body.className = '';
     },
 
-    async handleRegister(e) {
-        e.preventDefault();
-        console.log("Tentando registrar...");
-
-        try {
-            const usernameInput = document.getElementById('register-username');
-            const passwordInput = document.getElementById('register-password');
-
-            if (!usernameInput || !passwordInput) return;
-
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            if (!username || !password) {
-                Notification.show('Preencha todos os campos!', 'error');
-                return;
-            }
-
-            const users = Storage.getUsers();
-            if (users.find(u => u.username === username)) {
-                Notification.show('Usuário já existe! Tente outro.', 'error');
-                return;
-            }
-
-            // Criar usuário
-            users.push({ username, password });
-            Storage.saveUsers(users);
-
-            // Inicializar tarefas padrão
-            const initialTasks = this.defaultTasks.map((title, index) => ({
-                id: Date.now() + index,
-                title: title
-            }));
-            Storage.saveTasks(username, initialTasks);
-
-            // Auto login
-            this.currentUser = username;
-            Storage.setCurrentUser(username);
-
-            // Limpar form
-            usernameInput.value = '';
-            passwordInput.value = '';
-
-            Notification.show(`Bem-vindo(a), ${username}!`, 'success');
-            this.loadDashboard();
-
-        } catch (error) {
-            console.error("Erro no registro:", error);
-            Notification.show("Erro ao criar conta.", 'error');
+    applyTheme(theme) {
+        if (theme) {
+            document.body.className = `theme-${theme}`;
+        } else {
+            document.body.className = '';
         }
     },
 
     async handleLogin(e) {
         e.preventDefault();
-        console.log("Tentando login...");
 
-        try {
-            const usernameInput = document.getElementById('login-username');
-            const passwordInput = document.getElementById('login-password');
+        const usernameInput = document.getElementById('login-username');
+        const passwordInput = document.getElementById('login-password');
 
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
+        const username = usernameInput.value.trim().toLowerCase();
+        const password = passwordInput.value.trim();
 
-            const users = Storage.getUsers();
-            const user = users.find(u => u.username === username && u.password === password);
+        if (!this.appData || !this.appData.users) {
+            Notification.show('Erro nos dados do sistema.', 'error');
+            return;
+        }
 
-            if (user) {
-                this.currentUser = username;
-                Storage.setCurrentUser(username);
+        const user = this.appData.users.find(u => u.username === username && u.password === password);
 
-                usernameInput.value = '';
-                passwordInput.value = '';
+        if (user) {
+            this.currentUser = username;
+            Storage.setCurrentUser(username);
 
-                this.loadDashboard();
-                Notification.show(`Olá de volta, ${username}!`, 'success');
-            } else {
-                Notification.show('Usuário ou senha incorretos.', 'error');
-            }
-        } catch (error) {
-            console.error("Erro no login:", error);
-            Notification.show("Erro ao fazer login.", 'error');
+            this.applyTheme(user.theme);
+
+            usernameInput.value = '';
+            passwordInput.value = '';
+
+            this.loadDashboard();
+            Notification.show(`Olá, ${username.charAt(0).toUpperCase() + username.slice(1)}! ✨`, 'success');
+        } else {
+            Notification.show('Ops! Nome ou senha errados.', 'error');
         }
     },
 
     async handleLogout() {
-        const confirmed = await Modal.confirm("Deseja realmente sair?");
+        const confirmed = await Modal.confirm("Quer mesmo sair?");
         if (confirmed) {
             this.currentUser = null;
             Storage.setCurrentUser(null);
             this.showScreen('login-screen');
+            document.body.className = '';
         }
     },
 
     loadDashboard() {
         const displayUser = document.getElementById('display-username');
-        if (displayUser) displayUser.textContent = this.currentUser;
+        if (displayUser && this.currentUser) {
+            displayUser.textContent = this.currentUser.charAt(0).toUpperCase() + this.currentUser.slice(1);
+        }
 
         this.showScreen('dashboard-screen');
         this.renderTasks();
@@ -290,20 +206,19 @@ const App = {
 
     renderTasks() {
         const taskList = document.getElementById('task-list');
-        if (!taskList) return;
+        if (!taskList || !this.appData) return;
 
         taskList.innerHTML = '';
 
-        const userTasks = Storage.getTasks(this.currentUser);
+        const userData = this.appData.users.find(u => u.username === this.currentUser);
+        if (!userData || !userData.tasks) return;
+
+        const userTasks = userData.tasks;
         const progress = Storage.getProgress();
         const progressKey = `${this.currentDateKey}_${this.currentUser}`;
         const completedTaskIds = progress[progressKey] || [];
 
         let completedCount = 0;
-
-        if (userTasks.length === 0) {
-            taskList.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">Nenhuma tarefa cadastrada. Vá em gerenciar para adicionar!</p>';
-        }
 
         userTasks.forEach(task => {
             const isCompleted = completedTaskIds.includes(task.id);
@@ -334,33 +249,6 @@ const App = {
         if (totalCountEl) totalCountEl.textContent = total;
     },
 
-    renderManageList() {
-        const list = document.getElementById('manage-task-list');
-        if (!list) return;
-
-        list.innerHTML = '';
-        const userTasks = Storage.getTasks(this.currentUser);
-
-        userTasks.forEach(task => {
-            const li = document.createElement('li');
-            li.className = 'manage-task-item';
-            li.innerHTML = `
-                <span>${task.title}</span>
-                <button class="btn-delete" data-id="${task.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                </button>
-            `;
-            // Adicionar evento no botão delete
-            const btnDelete = li.querySelector('.btn-delete');
-            btnDelete.onclick = (e) => {
-                e.stopPropagation();
-                App.deleteTask(task.id);
-            };
-
-            list.appendChild(li);
-        });
-    },
-
     toggleTask(taskId, event) {
         const progress = Storage.getProgress();
         const progressKey = `${this.currentDateKey}_${this.currentUser}`;
@@ -382,17 +270,17 @@ const App = {
         Storage.saveProgress(progress);
         this.renderTasks();
 
-        // Lógica de Animações
+        // Verificar se completou todas
         if (isCompleting) {
-            const userTasks = Storage.getTasks(this.currentUser);
-            const total = userTasks.length;
+            const userData = this.appData.users.find(u => u.username === this.currentUser);
+            if (userData && userData.tasks) {
+                const userTasks = userData.tasks;
+                const total = userTasks.length;
+                const activeCompletedCount = userTasks.filter(task => completedIds.includes(task.id)).length;
 
-            // Conta apenas tarefas que existem na lista atual E estão completas
-            const activeCompletedCount = userTasks.filter(task => completedIds.includes(task.id)).length;
-
-            if (activeCompletedCount === total && total > 0) {
-                // Todas as tarefas completas!
-                this.showCelebrationAnimation();
+                if (activeCompletedCount === total && total > 0) {
+                    this.showCelebrationAnimation();
+                }
             }
         }
     },
@@ -401,44 +289,14 @@ const App = {
         const overlay = document.getElementById('celebration-animation');
         if (overlay) {
             overlay.classList.add('active');
-            // Tocar som mais longo ou repetido
             this.playSuccessSound();
             setTimeout(() => this.playSuccessSound(), 300);
             setTimeout(() => this.playSuccessSound(), 600);
 
             setTimeout(() => {
                 overlay.classList.remove('active');
-            }, 2500); // Mostra por 2.5 segundos
+            }, 2500);
         }
-    },
-
-    async handleAddTask(e) {
-        e.preventDefault();
-        const titleInput = document.getElementById('new-task-title');
-        const title = titleInput.value.trim();
-        if (!title) return;
-
-        const userTasks = Storage.getTasks(this.currentUser);
-        userTasks.push({
-            id: Date.now(),
-            title: title
-        });
-        Storage.saveTasks(this.currentUser, userTasks);
-
-        titleInput.value = '';
-        this.renderManageList();
-        Notification.show("Tarefa adicionada!", "success");
-    },
-
-    async deleteTask(taskId) {
-        const confirmed = await Modal.confirm('Tem certeza que deseja remover esta tarefa?');
-        if (!confirmed) return;
-
-        let userTasks = Storage.getTasks(this.currentUser);
-        userTasks = userTasks.filter(t => t.id !== taskId);
-        Storage.saveTasks(this.currentUser, userTasks);
-        this.renderManageList();
-        Notification.show("Tarefa removida.", "info");
     },
 
     updateDateDisplay() {
@@ -473,7 +331,7 @@ const App = {
             oscillator.start();
             oscillator.stop(audioContext.currentTime + 0.1);
         } catch (e) {
-            console.log("Audio não suportado ou erro:", e);
+            console.log("Audio não suportado");
         }
     },
 
@@ -510,7 +368,7 @@ const App = {
     }
 };
 
-// Inicializar com proteção
+// Inicializar
 document.addEventListener('DOMContentLoaded', () => {
     try {
         App.init();

@@ -1,14 +1,173 @@
 {
-    "defaultTasks": [
-        "Arrumar a cama",
-        "Guardar roupas",
-        "Guardar brinquedos",
-        "Organizar o quarto",
-        "Fazer tema da escola",
-        "Tomar 5 goles de água",
-        "Escovar cabelo",
-        "Escovar os dentes",
-        "Lavar o rosto",
-        "Trocar de roupa"
+    "users": [
+        {
+            "username": "rafaela",
+            "password": "1234",
+            "theme": "unicorn",
+            "tasks": [
+                {
+                    "id": 101,
+                    "title": "Arrumar a cama"
+                },
+                {
+                    "id": 102,
+                    "title": "Guardar roupas"
+                },
+                {
+                    "id": 103,
+                    "title": "Guardar brinquedos"
+                },
+                {
+                    "id": 104,
+                    "title": "Organizar o quarto"
+                },
+                {
+                    "id": 105,
+                    "title": "Fazer tema da escola"
+                },
+                {
+                    "id": 106,
+                    "title": "Tomar 5 goles de água"
+                },
+                {
+                    "id": 107,
+                    "title": "Escovar cabelo"
+                },
+                {
+                    "id": 108,
+                    "title": "Escovar os dentes"
+                },
+                {
+                    "id": 109,
+                    "title": "Lavar o rosto"
+                },
+                {
+                    "id": 110,
+                    "title": "Trocar de roupa"
+                },
+                {
+                    "id": 111,
+                    "title": "Tirar o lixo"
+                },
+                {
+                    "id": 112,
+                    "title": "Arrumar a mesa"
+                },
+                {
+                    "id": 113,
+                    "title": "Vitamina D"
+                }
+            ]
+        },
+        {
+            "username": "isabela",
+            "password": "1234",
+            "theme": "mermaid",
+            "tasks": [
+                {
+                    "id": 201,
+                    "title": "Arrumar a cama"
+                },
+                {
+                    "id": 202,
+                    "title": "Guardar roupas"
+                },
+                {
+                    "id": 203,
+                    "title": "Guardar brinquedos"
+                },
+                {
+                    "id": 204,
+                    "title": "Organizar o quarto"
+                },
+                {
+                    "id": 205,
+                    "title": "Fazer tema da escola"
+                },
+                {
+                    "id": 206,
+                    "title": "Tomar 5 goles de água"
+                },
+                {
+                    "id": 207,
+                    "title": "Escovar cabelo"
+                },
+                {
+                    "id": 208,
+                    "title": "Escovar os dentes"
+                },
+                {
+                    "id": 209,
+                    "title": "Lavar o rosto"
+                },
+                {
+                    "id": 210,
+                    "title": "Trocar de roupa"
+                },
+                {
+                    "id": 211,
+                    "title": "Vitamina D"
+                },
+                {
+                    "id": 212,
+                    "title": "Encher Garrafas"
+                },
+                {
+                    "id": 213,
+                    "title": "Abrir janelas"
+                },
+                {
+                    "id": 214,
+                    "title": "Tomar Avemis"
+                }
+            ]
+        },
+        {
+            "username": "julia",
+            "password": "1234",
+            "theme": "princess",
+            "tasks": [
+                {
+                    "id": 301,
+                    "title": "Arrumar a cama"
+                },
+                {
+                    "id": 302,
+                    "title": "Guardar roupas"
+                },
+                {
+                    "id": 303,
+                    "title": "Guardar brinquedos"
+                },
+                {
+                    "id": 304,
+                    "title": "Organizar o quarto"
+                },
+                {
+                    "id": 305,
+                    "title": "Fazer tema da escola"
+                },
+                {
+                    "id": 306,
+                    "title": "Tomar 5 goles de água"
+                },
+                {
+                    "id": 307,
+                    "title": "Escovar cabelo"
+                },
+                {
+                    "id": 308,
+                    "title": "Escovar os dentes"
+                },
+                {
+                    "id": 309,
+                    "title": "Lavar o rosto"
+                },
+                {
+                    "id": 310,
+                    "title": "Trocar de roupa"
+                }
+            ]
+        }
     ]
 }
