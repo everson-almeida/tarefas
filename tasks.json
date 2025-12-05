@@ -129,43 +129,75 @@
             "tasks": [
                 {
                     "id": 301,
-                    "title": "Arrumar a cama"
-                },
-                {
-                    "id": 302,
-                    "title": "Guardar roupas"
-                },
-                {
-                    "id": 303,
-                    "title": "Guardar brinquedos"
-                },
-                {
-                    "id": 304,
-                    "title": "Organizar o quarto"
-                },
-                {
-                    "id": 305,
-                    "title": "Fazer tema da escola"
-                },
-                {
-                    "id": 306,
-                    "title": "Tomar 5 goles de água"
-                },
-                {
-                    "id": 307,
-                    "title": "Escovar cabelo"
-                },
-                {
-                    "id": 308,
-                    "title": "Escovar os dentes"
-                },
-                {
-                    "id": 309,
                     "title": "Lavar o rosto"
                 },
                 {
+                    "id": 302,
+                    "title": "Arrumar quarto"
+                },
+                {
+                    "id": 303,
+                    "title": "Guardar roupa"
+                },
+                {
+                    "id": 304,
+                    "title": "Tomar café"
+                },
+                {
+                    "id": 305,
+                    "title": "Escovar dentes"
+                },
+                {
+                    "id": 306,
+                    "title": "Trocar roupa"
+                },
+                {
+                    "id": 307,
+                    "title": "Mochila/tema"
+                },
+                {
+                    "id": 308,
+                    "title": "Agua e comida dogs"
+                },
+                {
+                    "id": 309,
+                    "title": "Arrumar e varrer a sala"
+                },
+                {
                     "id": 310,
-                    "title": "Trocar de roupa"
+                    "title": "Escola"
+                },
+                {
+                    "id": 311,
+                    "title": "Lanche saudável"
+                },
+                {
+                    "id": 312,
+                    "title": "Banho"
+                },
+                {
+                    "id": 313,
+                    "title": "Brincar"
+                },
+                {
+                    "id": 314,
+                    "title": "Janta"
+                },
+                {
+                    "id": 315,
+                    "title": "Vitaminas"
+                },
+                {
+                    "id": 316,
+                    "title": "Escovar dentes"
+                },
+                {
+                    "id": 317,
+                    "title": "Pijama"
+                },
+                {
+                    "id": 318,
+                    "title": "Leiturinha"
                 }
             ]
         }
