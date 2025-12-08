@@ -200,6 +200,124 @@
                     "title": "Leiturinha"
                 }
             ]
+        },
+        {
+            "username": "leonardo",
+            "password": "1234",
+            "theme": "superhero",
+            "tasks": [
+                {
+                    "id": 401,
+                    "title": "Fazer o tema"
+                },
+                {
+                    "id": 402,
+                    "title": "Arrumar a cama"
+                },
+                {
+                    "id": 403,
+                    "title": "Tirar o pó"
+                },
+                {
+                    "id": 404,
+                    "title": "Encher as garrafas"
+                },
+                {
+                    "id": 405,
+                    "title": "Limpar os quartos"
+                },
+                {
+                    "id": 406,
+                    "title": "Tirar o lixo"
+                },
+                {
+                    "id": 407,
+                    "title": "Limpar o vaso"
+                },
+                {
+                    "id": 408,
+                    "title": "Dar água para o girassol"
+                },
+                {
+                    "id": 409,
+                    "title": "Arrumar o sofá da sala"
+                },
+                {
+                    "id": 410,
+                    "title": "Arrumar os tapetes"
+                },
+                {
+                    "id": 411,
+                    "title": "Dar água para as cachorras"
+                },
+                {
+                    "id": 412,
+                    "title": "Varrer o pátio"
+                },
+                {
+                    "id": 413,
+                    "title": "Fazer o duolingo"
+                }
+            ]
+        },
+        {
+            "username": "gabriel",
+            "password": "1234",
+            "theme": "space",
+            "tasks": [
+                {
+                    "id": 501,
+                    "title": "Fazer o tema"
+                },
+                {
+                    "id": 502,
+                    "title": "Arrumar a cama"
+                },
+                {
+                    "id": 503,
+                    "title": "Tirar o pó"
+                },
+                {
+                    "id": 504,
+                    "title": "Encher as garrafas"
+                },
+                {
+                    "id": 505,
+                    "title": "Limpar os quartos"
+                },
+                {
+                    "id": 506,
+                    "title": "Tirar o lixo"
+                },
+                {
+                    "id": 507,
+                    "title": "Limpar o vaso"
+                },
+                {
+                    "id": 508,
+                    "title": "Dar água para o girassol"
+                },
+                {
+                    "id": 509,
+                    "title": "Arrumar o sofá da sala"
+                },
+                {
+                    "id": 510,
+                    "title": "Arrumar os tapetes"
+                },
+                {
+                    "id": 511,
+                    "title": "Dar água para as cachorras"
+                },
+                {
+                    "id": 512,
+                    "title": "Varrer o pátio"
+                },
+                {
+                    "id": 513,
+                    "title": "Fazer o duolingo"
+                }
+            ]
         }
     ]
 }

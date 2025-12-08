@@ -39,6 +39,24 @@ body.theme-princess {
   --success: #54a0ff;
 }
 
+/* TEMA LEONARDO: SUPER-HERÓI */
+body.theme-superhero {
+  --primary-color: #FF6348;
+  --primary-dark: #E84118;
+  --accent-color: #FFA502;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --success: #26de81;
+}
+
+/* TEMA GABRIEL: ESPAÇO */
+body.theme-space {
+  --primary-color: #5F27CD;
+  --primary-dark: #341f97;
+  --accent-color: #00D2D3;
+  --bg-gradient: linear-gradient(to top, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  --success: #FFC312;
+}
+
 * {
   margin: 0;
   padding: 0;
