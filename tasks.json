@@ -56,6 +56,10 @@
                 {
                     "id": 113,
                     "title": "Vitamina D"
+                },
+                {
+                    "id": 114,
+                    "title": "Arrumar o lanche"
                 }
             ]
         },
@@ -119,6 +123,14 @@
                 {
                     "id": 214,
                     "title": "Tomar Avemis"
+                },
+                {
+                    "id": 215,
+                    "title": "Arrumar o lanche"
+                },
+                {
+                    "id": 216,
+                    "title": "Secar a louça"
                 }
             ]
         },
